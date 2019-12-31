@@ -36,6 +36,19 @@ export default class App extends React.Component {
     );
   }
 
+  updateWeather = () => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.fetchWeather(position.coords.latitude, position.coords.longitude);
+      },
+      error => {
+        this.setState({
+          error: 'Erro ao obter condições meteorológicas'
+        });
+      }
+    );
+  };
+
   fetchWeather(lat, lon) {
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&lang=pt&units=metric`
@@ -67,7 +80,7 @@ export default class App extends React.Component {
             <ActivityIndicator size="large" color="#fff" />
           </View>
         ) : (
-            <Weather temperature={temperature} pressure={pressure} feels_like={feels_like} humidity={humidity} wind={wind} city={city} country={country} description={description} icon={icon} />
+            <Weather updateWeather={this.updateWeather} temperature={temperature} pressure={pressure} feels_like={feels_like} humidity={humidity} wind={wind} city={city} country={country} description={description} icon={icon} />
           )}
       </View>
     );
