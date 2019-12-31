@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text, Divider } from 'react-native-elements';
 
 
-const Weather = ({ temperature, pressure, humidity, wind, city, country, description, icon, feels_like }) => {
+const Weather = ({ updateWeather, temperature, pressure, humidity, wind, city, country, description, icon, feels_like }) => {
     if (city != null) {
 
         let time;
@@ -43,6 +43,11 @@ const Weather = ({ temperature, pressure, humidity, wind, city, country, descrip
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                     <Text style={styles.notes}>Pressão: {pressure}hpa</Text>
                 </View>
+                <TouchableOpacity
+                    TouchableOpacity style={styles.updateButton}
+                    onPress={updateWeather}
+                ><Text style={styles.updateButtonText}>Atualizar Clima</Text>
+                </TouchableOpacity>
             </View>
         );
     } else {
@@ -83,6 +88,21 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: '#fff',
         textTransform: 'capitalize'
+    },
+    updateButton: {
+        height: 42,
+        borderRadius: 5,
+        borderWidth: 2,
+        borderColor: "#fff",
+        backgroundColor: "transparent",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 40
+    },
+    updateButtonText: {
+        fontSize: 18,
+        color: "#fff",
+        fontWeight: "bold"
     }
 });
 
