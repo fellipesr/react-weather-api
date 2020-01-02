@@ -37,16 +37,7 @@ export default class App extends React.Component {
   }
 
   updateWeather = () => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        this.fetchWeather(position.coords.latitude, position.coords.longitude);
-      },
-      error => {
-        this.setState({
-          error: 'Erro ao obter condições meteorológicas'
-        });
-      }
-    );
+    this.componentDidMount();
   };
 
   fetchWeather(lat, lon) {
